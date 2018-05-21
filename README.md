@@ -1,7 +1,9 @@
 # AutoBuildIpa
 利用python自动打包
 
-打包命令：python3 buildPrepare.py -f Project/TestProject.json
+## 打包命名
+python3 buildPrepare.py -f Project/TestProject.json
+
 TestProject.json为打包的项目配置，需要手动配置
 "workSpaceFolder":"TestProject",    --拉取下来的项目文件夹名称
 "workSpaceGitUrl":"https://github.com/yahua/TestAutoBuildIpa.git",   --仓库地址
