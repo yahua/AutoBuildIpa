@@ -1,0 +1,7 @@
+{
+    "workSpaceFolder":"Fischerhaus",
+    "说明":"workSpaceGitUrl 在本机未输入过 需要帐号和密码https://帐号:密码@github.com/yahua/TestAutoBuildIpa.git",
+    "workSpaceGitUrl":"https://git.dev.tencent.com/yahua/Fischerhaus.git",
+    "branch":"develop",
+    "ipaConfigFilePath":"ipaConfig/debug/"
+}
