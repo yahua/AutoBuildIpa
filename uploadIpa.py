@@ -3,7 +3,13 @@ import requests
 import os
 import json
 
-def initConfig(folder):
+uploadLog = None
+
+def initConfig(folder, log):
+
+    global uploadLog
+    uploadLog = log
+
     jsonFilePath = folder + '/' + 'upload.json'
     if os.path.exists(jsonFilePath) == False:
         print('there is not upload config, so don\'t upload ipa')
@@ -34,22 +40,22 @@ def parserPgyerUploadResult(jsonResult):
 
 def uploadIpaToPgyer(ipaPath, platformDict):
 
-  print ("ipaPath:%s" % ipaPath)
-  files = {'file': open(ipaPath, 'rb')}
-  headers = {'enctype':'multipart/form-data'}
-  payload = {'_api_key':platformDict.get('_api_key'),
+    print ("ipaPath:%s" % ipaPath)
+    files = {'file': open(ipaPath, 'rb')}
+    headers = {'enctype':'multipart/form-data'}
+    payload = {'_api_key':platformDict.get('_api_key'),
              'buildInstallType':platformDict.get('buildInstallType'),
              'buildPassword':platformDict.get('buildPassword'),
-             'buildUpdateDescription':platformDict.get('buildUpdateDescription'),
+             'buildUpdateDescription':uploadLog,
              'buildName':platformDict.get('buildName')}
-  print(str(payload))
-  print('uploading....')
-  r = requests.post(platformDict.get('uploadUrl'), data=payload, files=files, headers=headers)
-  print(str(r))
-  if r.status_code == requests.codes.ok:
+    print(str(payload))
+    print('uploading....')
+    r = requests.post(platformDict.get('uploadUrl'), data=payload, files=files, headers=headers)
+    print(str(r))
+    if r.status_code == requests.codes.ok:
         result = r.json()
         print('result:%s' % result)
-  else:
+    else:
         print('HTTPError,Code:'+r.status_code)
 
 def uploadIpa(ipaPath):

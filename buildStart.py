@@ -93,10 +93,10 @@ def openProjectPath(filePath):
 	os.chdir(filePath)
 
 #代码调用打包
-def startBag(filePath, output):
+def startBag(filePath, output, log):
 
 	#上传初始化
-	uploadIpa.initConfig(filePath)
+	uploadIpa.initConfig(filePath, log)
 
 	global exportOptionsPlistFilePath
 	exportOptionsPlistFilePath = os.getcwd() + '/' + filePath + 'exportOptions.plist'

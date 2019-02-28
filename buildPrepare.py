@@ -9,11 +9,27 @@ projectConfig = None
 
 def excuteCmd(cmd):
     print('cmd: %s', cmd)
-    process = subprocess.Popen(cmd, shell=True)
+    process = subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     process.wait()
     return process.returncode
 
-
+def logGit():
+    cmd = 'git log -5'
+    print('cmd: %s', cmd)
+    process = subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    process.wait()
+    stdout, stderr = process.communicate()  # 记录错误日志文件
+    log = str(stdout, encoding="utf-8")
+    logList = log.split('\n\n')
+    uploadLogList = []
+    for desc in logList:
+        space = ' '
+        if desc.startswith(space):
+            #去除空格
+            uploadLogList.append(desc.replace(' ', ''))
+    commit_content = '\n'.join(uploadLogList)
+    print('本次更新内容:\n', commit_content)
+    return commit_content
 
 def cloneGit():
     cmd = 'git init'
@@ -47,8 +63,9 @@ def checkGit():
     if excuteCmd(cmd) != 0:
         if cloneGit():
             if pullGit():
+                log = logGit()
                 #开始打包
-                buildStart.startBag(projectConfig.get('ipaConfigFilePath'), commonConfig.get('outputPath'))
+                buildStart.startBag(projectConfig.get('ipaConfigFilePath'), commonConfig.get('outputPath'), log)
                 pass
             else:
                 print('git pull failure')
@@ -56,8 +73,9 @@ def checkGit():
             print('git clone failure')
     else:
         if pullGit():
+            log = logGit()
             # 开始打包
-            buildStart.startBag(projectConfig.get('ipaConfigFilePath'), commonConfig.get('outputPath'))
+            buildStart.startBag(projectConfig.get('ipaConfigFilePath'), commonConfig.get('outputPath'), log)
             pass
         else:
             print('git pull failure')
@@ -93,6 +111,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--file", help="Build the project config json file.", metavar="project config json file")
     options = parser.parse_args()
+    options.file = 'Project/Fischerhaus.json'
     if options.file is None:
         print('请输入要打包的项目配置json路径')
     else:
