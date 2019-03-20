@@ -111,7 +111,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--file", help="Build the project config json file.", metavar="project config json file")
     options = parser.parse_args()
-    options.file = 'Project/Fischerhaus.json'
+    #options.file = 'Project/Fischerhaus.json'
     if options.file is None:
         print('请输入要打包的项目配置json路径')
     else:
