@@ -8,8 +8,8 @@
 	<string>development</string>
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>com.ym.ehome</key>
-		<string>Ehome_dev</string>
+		<key>com.wangle.vlog.beta</key>
+		<string>Vlog_Development</string>
 	</dict>
 	<key>uploadSymbols</key>
 	<true/>
