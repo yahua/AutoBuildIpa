@@ -1,0 +1,23 @@
+{
+  	"uploadPlatform":"payer",
+	"uploadPlatformInfo":{
+		"payer":{
+			"buildUpdateDescription":"test auto bag",
+			"uploadUrl":"https://www.pgyer.com/apiv2/app/upload",
+			"_api_key":"2afb569fb1b4607d362439f626128bf5",
+			"buildInstallType":"2",
+			"buildPassword":"",
+			"buildName":"渔民E家"
+		},
+        "fir":{
+            "log":"1、测试fir自动打包上传",
+            "appsUrl":"http://api.fir.im/apps",
+            "api_token":"99dfeffdef8bb3aaaa478cf7ce3c24a2",
+            "bundle_id":"com.ym.ehome",
+            "ipaName":"渔民E家",
+            "type":"ios",
+            "ipa_build":"5",
+            "ipa_version":"1.0"
+        }
+	}
+}

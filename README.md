@@ -6,6 +6,9 @@
 2、直接点击buildPrepare可执行文件即可  在CommonConfig.json中配置项目json路径即可
 
 
+##配置
+参考ipaConfig文件夹
+
 
 TestProject.json为打包的项目配置，需要手动配置
 "workSpaceFolder":"TestProject",    --拉取下来的项目文件夹名称
