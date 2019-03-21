@@ -2,6 +2,7 @@
 import requests
 import os
 import json
+import firUpload as fir
 
 uploadLog = None
 
@@ -71,3 +72,9 @@ def uploadIpa(ipaPath):
         return
     if uploadPlatform == 'payer':
         uploadIpaToPgyer(ipaPath, platformDict)
+        return
+
+    if uploadPlatform == 'fir':
+        fir.uploadIpaToFir(ipaPath, platformDict)
+        return
+
