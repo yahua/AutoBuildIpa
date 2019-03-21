@@ -1,5 +1,6 @@
 import subprocess
 import os
+import sys
 import argparse
 import json
 import buildStart
@@ -93,17 +94,21 @@ def intoProjectWorkspace():
     commonConfig['outputPath'] = desktop + commonConfig.get('outputPath')
     checkGit()
 
-def initConifg(filePath):
-    jsonFilePath = filePath
+def initConifg(rootPath):
+
+    commonConfigFilePath = rootPath + '/CommonConfig.json'
+    with open(commonConfigFilePath, 'r') as load_f:
+        global commonConfig
+        commonConfig = json.load(load_f)
+
+    jsonFilePath = rootPath + commonConfig['project']
     if os.path.exists(jsonFilePath) == False:
         print('there is no project config')
         return False
     with open(jsonFilePath, 'r') as load_f:
         global projectConfig
         projectConfig = json.load(load_f)
-    with open('CommonConfig.json', 'r') as load_f:
-        global commonConfig
-        commonConfig = json.load(load_f)
+
     return True
 
 if __name__ == '__main__':
@@ -112,8 +117,9 @@ if __name__ == '__main__':
     parser.add_argument("-f", "--file", help="Build the project config json file.", metavar="project config json file")
     options = parser.parse_args()
     #options.file = 'Project/Fischerhaus.json'
-    if options.file is None:
+    dirname, filename = os.path.split(os.path.abspath(sys.argv[0]))
+    if dirname is None:
         print('请输入要打包的项目配置json路径')
     else:
-         if initConifg(options.file):
+         if initConifg(dirname):
              intoProjectWorkspace()
