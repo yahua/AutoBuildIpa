@@ -1,12 +1,15 @@
 # AutoBuildIpa
 利用python自动打包
 
+## 生成可执行文件
+pyinstaller -F buildPrepare.py
+
 ## 打包方式
 1、python3 buildPrepare.py -f Project/TestProject.json
 2、直接点击buildPrepare可执行文件即可  在CommonConfig.json中配置项目json路径即可
 
 
-##配置
+## 配置
 参考ipaConfig文件夹
 
 

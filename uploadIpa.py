@@ -6,12 +6,10 @@ import firUpload as fir
 
 uploadLog = None
 
-def initConfig(folder, log):
-
-    global uploadLog
-    uploadLog = log
-
-    jsonFilePath = folder  + 'upload.json'
+def initConfig(folder):
+    global iconPath
+    iconPath = folder + '/' + 'Icon-1024.png'
+    jsonFilePath = folder + '/' + 'upload.json'
     if os.path.exists(jsonFilePath) == False:
         print('there is not upload config, so don\'t upload ipa')
         return
@@ -25,6 +23,7 @@ def initConfig(folder, log):
     uploadPlatform = emailDict.get('uploadPlatform')
     global allUploadPlatform
     allUploadPlatform = emailDict.get('uploadPlatformInfo')
+
 
 
 def parserPgyerUploadResult(jsonResult):
@@ -47,7 +46,7 @@ def uploadIpaToPgyer(ipaPath, platformDict):
     payload = {'_api_key':platformDict.get('_api_key'),
              'buildInstallType':platformDict.get('buildInstallType'),
              'buildPassword':platformDict.get('buildPassword'),
-             'buildUpdateDescription':uploadLog,
+             'buildUpdateDescription':'',
              'buildName':platformDict.get('buildName')}
     print(str(payload))
     print('uploading....')
@@ -75,6 +74,6 @@ def uploadIpa(ipaPath):
         return
 
     if uploadPlatform == 'fir':
-        fir.uploadIpaToFir(ipaPath, platformDict)
+        fir.uploadIpaToFir(ipaPath, iconPath, platformDict)
         return
 

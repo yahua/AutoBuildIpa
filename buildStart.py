@@ -93,15 +93,15 @@ def openProjectPath(filePath):
 	os.chdir(filePath)
 
 #代码调用打包
-def startBag(filePath, output, log):
+def startBag(filePath, output):
 
 	#上传初始化
-	uploadIpa.initConfig(filePath, log)
+	uploadIpa.initConfig(filePath)
 
 	global exportOptionsPlistFilePath
-	exportOptionsPlistFilePath = os.getcwd() + '/' + filePath + 'exportOptions.plist'
+	exportOptionsPlistFilePath = filePath + '/exportOptions.plist'
 
-	jsonFilePath = filePath + 'ipa.json'
+	jsonFilePath = filePath + '/ipa.json'
 	with open(jsonFilePath, 'r') as load_f:
 		ipaConfig = json.load(load_f)
 	global scheme
@@ -122,13 +122,15 @@ def startBag(filePath, output, log):
 	global configuration
 	configuration = ipaConfig.get('configuration')
 
+	dirname, filename = os.path.split(filePath)
+	dirname, filename = os.path.split(dirname)
+	projectPath = dirname + '/' + ipaConfig.get('projectPath')
+	openProjectPath(projectPath)
 	if project is None and workspace is None:
 		pass
 	elif workspace is not None:
-		openProjectPath(ipaConfig.get('projectPath'))
 		buildWorkspace()
 	elif project is not None:
-		openProjectPath(ipaConfig.get('projectPath'))
 		buildProject()
 
 

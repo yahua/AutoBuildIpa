@@ -1,0 +1,15 @@
+{
+  	"uploadPlatform":"fir",
+	"uploadPlatformInfo":{
+        "fir":{
+            "log":"1、测试fir自动打包上传",
+            "appsUrl":"http://api.fir.im/apps",
+            "api_token":"9c25d309bcac2887df8bca0322f995d2",
+            "bundle_id":"com.wangle.vlog.beta",
+            "ipaName":"KIKITest",
+            "type":"ios",
+            "ipa_build":"1.3.0",
+            "ipa_version":"1.3.0"
+        }
+	}
+}

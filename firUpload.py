@@ -12,6 +12,7 @@ class FirUploadInfo:
     appsUrl = ''
     type = ''
     api_token = ''
+    iconDict = None
     def __init__(self, config):
         self.ipaName = config['ipaName']
         self.ipaVersion = config['ipa_version']
@@ -35,6 +36,7 @@ def parseFirTokenResult(content, uploadInfo):
     resultDict = json.loads(content)
     uploadInfo.downloadUrl = 'https://fir.im/' + resultDict['short']
     uploadInfo.parseData(resultDict['cert']['binary'])
+    uploadInfo.iconDict = resultDict['cert']['icon']
 
 def getUploadUrl(uploadInfo):
 
@@ -50,7 +52,16 @@ def getUploadUrl(uploadInfo):
     else:
         return False
 
-def uploadIpaToFir(ipaPath, config):
+def uploadIconToFir(iconPath, config):
+    files = {'file': open(iconPath, 'rb')}
+    payload = {'key': config['key'],
+               'token': config['token']}
+    r = requests.post(config['upload_url'], data=payload, files=files)
+    if r.status_code == 200:
+        return True
+    return False
+
+def uploadIpaToFir(ipaPath, iconPath, config):
 
     uploadInfo = FirUploadInfo(config)
     if getUploadUrl(uploadInfo):
@@ -58,6 +69,12 @@ def uploadIpaToFir(ipaPath, config):
     else:
         print('获取fir token失败，无法上传')
         return
+    #上传图标
+    print('上传icon，请稍候。。。')
+    result = uploadIconToFir(iconPath, uploadInfo.iconDict)
+    if result == False:
+        print('上传icon，失败')
+    print('上传icon，成功')
 
     files = {'file': open(ipaPath, 'rb')}
     payload = {'key': uploadInfo.uploadKey,
@@ -68,7 +85,7 @@ def uploadIpaToFir(ipaPath, config):
                 'x:release_type': uploadInfo.ipaRelease_type,
                 'x:changelog': uploadInfo.log}
     print('上传fir的参数：' + str(payload))
-    print('上传中，请稍候。。。')
+    print('上传ipa中，请稍候。。。')
     r = requests.post(uploadInfo.uploadUrl, data=payload, files=files)
     if r.status_code == 200:
         print('上传fir成功\n' + uploadInfo.desc())
