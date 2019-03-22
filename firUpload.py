@@ -61,6 +61,24 @@ def uploadIconToFir(iconPath, config):
         return True
     return False
 
+def notifyToDingDing(info):
+    url = 'https://oapi.dingtalk.com/robot/send?access_token=083893655879d70181fb4ed2754896565c85a57f169a0c218642fd2eaa9553f3'
+    content = '版本：' + info.ipaVersion, + '\n' + info.log
+    data = {'msgtype': 'link',
+            'link': {
+                'title': 'Habibi ios包新鲜出炉了！！！',
+                'text': content,
+                'messageUrl': info.downloadUrl,
+                'picUrl': 'https://oivkbuqoc.qnssl.com/2e57c297e946d80f2baeb1945088ae639ef9bb27?attname=Icon-1024.png&tmp=1553226455.537458'
+                }
+            }
+
+    header = {'Content-Type': 'application/json'}
+    data = json.dumps(data)
+    res = requests.post(url, data=data, headers=header)
+    print('钉钉通知')
+    print(res.text)
+
 def uploadIpaToFir(ipaPath, iconPath, config):
 
     uploadInfo = FirUploadInfo(config)
@@ -89,6 +107,7 @@ def uploadIpaToFir(ipaPath, iconPath, config):
     r = requests.post(uploadInfo.uploadUrl, data=payload, files=files)
     if r.status_code == 200:
         print('上传fir成功\n' + uploadInfo.desc())
+        notifyToDingDing(uploadInfo)
         return True
     else:
         print('上传fir失败：')
