@@ -19,6 +19,8 @@ def initConfig(folder):
         print('there is not upload config, so don\'t upload ipa')
         return
 
+    global uploadOpen
+    uploadOpen = emailDict.get('uploadOpen')
     global uploadPlatform
     uploadPlatform = emailDict.get('uploadPlatform')
     global allUploadPlatform
@@ -59,6 +61,9 @@ def uploadIpaToPgyer(ipaPath, platformDict):
         print('HTTPError,Code:'+r.status_code)
 
 def uploadIpa(ipaPath):
+    if uploadOpen == '0':
+        print('无法上传ipa，因为upload.json中uploadOpen为0')
+        return
     if ipaPath is None:
         print('error ipaPath')
         return
