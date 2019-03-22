@@ -62,7 +62,7 @@ def uploadIconToFir(iconPath, config):
     return False
 
 def notifyToDingDing(info):
-    url = 'https://oapi.dingtalk.com/robot/send?access_token=083893655879d70181fb4ed2754896565c85a57f169a0c218642fd2eaa9553f3'
+    url = 'https://oapi.dingtalk.com/robot/send?access_token=c49c02cd22c715588795616c2a8bd884aeeacfc835bd86d522c89061b49038fc'
     content = '版本：' + info.ipaVersion + '\n更新内容：' + info.log
     data = {'msgtype': 'link',
             'link': {
