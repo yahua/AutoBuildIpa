@@ -63,7 +63,7 @@ def uploadIconToFir(iconPath, config):
 
 def notifyToDingDing(info):
     url = 'https://oapi.dingtalk.com/robot/send?access_token=083893655879d70181fb4ed2754896565c85a57f169a0c218642fd2eaa9553f3'
-    content = '版本：' + info.ipaVersion, + '\n' + info.log
+    content = '版本：' + info.ipaVersion + '\n更新内容：' + info.log
     data = {'msgtype': 'link',
             'link': {
                 'title': 'Habibi ios包新鲜出炉了！！！',
