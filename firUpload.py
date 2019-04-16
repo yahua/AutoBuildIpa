@@ -33,7 +33,7 @@ class FirUploadInfo:
 
 
 def parseFirTokenResult(content, uploadInfo):
-    resultDict = json.loads(content)
+    resultDict = json.loads(content.decode())
     uploadInfo.downloadUrl = 'https://fir.im/' + resultDict['short']
     uploadInfo.parseData(resultDict['cert']['binary'])
     uploadInfo.iconDict = resultDict['cert']['icon']
@@ -79,7 +79,7 @@ def notifyToDingDing(info):
     print('钉钉通知')
     print(res.text)
 
-def uploadIpaToFir(ipaPath, iconPath, config):
+def uploadIpaToFir(ipaPath, iconPath, notifyToDingDing, config):
 
     uploadInfo = FirUploadInfo(config)
     if getUploadUrl(uploadInfo):
@@ -107,7 +107,8 @@ def uploadIpaToFir(ipaPath, iconPath, config):
     r = requests.post(uploadInfo.uploadUrl, data=payload, files=files)
     if r.status_code == 200:
         print('上传fir成功\n' + uploadInfo.desc())
-        notifyToDingDing(uploadInfo)
+        if notifyToDingDing == '1':
+            notifyToDingDing(uploadInfo)
         return True
     else:
         print('上传fir失败：')

@@ -5,11 +5,11 @@
 	<key>compileBitcode</key>
 	<false/>
 	<key>method</key>
-	<string>development</string>
+	<string>ad-hoc</string>
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>com.wangle.vlog.beta</key>
-		<string>Vlog_Development</string>
+		<key>com.ym.ehome</key>
+		<string>sound_dev</string>
 	</dict>
 	<key>uploadSymbols</key>
 	<true/>

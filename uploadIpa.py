@@ -21,6 +21,8 @@ def initConfig(folder):
 
     global uploadOpen
     uploadOpen = emailDict.get('uploadOpen')
+    global notifyToDingDing
+    notifyToDingDing = emailDict.get('notifyToDingDing')
     global uploadPlatform
     uploadPlatform = emailDict.get('uploadPlatform')
     global allUploadPlatform
@@ -79,6 +81,6 @@ def uploadIpa(ipaPath):
         return
 
     if uploadPlatform == 'fir':
-        fir.uploadIpaToFir(ipaPath, iconPath, platformDict)
+        fir.uploadIpaToFir(ipaPath, iconPath, notifyToDingDing, platformDict)
         return
 
