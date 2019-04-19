@@ -1,7 +1,7 @@
 {
     "uploadOpen":"1",
   	"uploadPlatform":"fir",
-    "notifyToDingDing","0",
+    "notifyToDingDing":"0",
 	"uploadPlatformInfo":{
         "payer":{
             "buildUpdateDescription":"test auto bag",
