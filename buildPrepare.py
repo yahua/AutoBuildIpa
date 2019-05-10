@@ -81,9 +81,9 @@ def checkGit():
         else:
             print('git pull failure')
 
-def intoProjectWorkspace():
-    desktop = os.path.join(os.path.expanduser("~"), 'Desktop')
-    rootWorkspace = desktop + commonConfig['workSpaceFilePath']
+def intoProjectWorkspace(rootPath):
+    #desktop = os.path.join(os.path.expanduser("~"), 'Desktop')
+    rootWorkspace = rootPath + commonConfig['workSpaceFilePath']
     folder = projectConfig['workSpaceFolder']
     projectFilePath = '%s%s' %(rootWorkspace, folder)
     if os.path.exists(projectFilePath) == False:
@@ -91,15 +91,15 @@ def intoProjectWorkspace():
         os.makedirs(projectFilePath)
     print('cd %s'%(projectFilePath))
     os.chdir(projectFilePath)
-    commonConfig['outputPath'] = desktop + commonConfig.get('outputPath')
+    commonConfig['outputPath'] = rootPath + commonConfig.get('outputPath')
     checkGit()
 
 def initConifg(rootPath):
 
-    commonConfigFilePath = rootPath + '/CommonConfig.json'
-    with open(commonConfigFilePath, 'r') as load_f:
-        global commonConfig
-        commonConfig = json.load(load_f)
+    global commonConfig
+    commonConfig = {'/workSpaceFilePath/': 'workspace',
+                    '/outputPath': 'output-ipa/',
+                    'project': '/project.json'}
 
     jsonFilePath = rootPath + commonConfig['project']
     if os.path.exists(jsonFilePath) == False:
