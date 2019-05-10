@@ -99,9 +99,9 @@ def startBag(filePath, output, log):
 	uploadIpa.initConfig(filePath, log)
 
 	global exportOptionsPlistFilePath
-	exportOptionsPlistFilePath = os.getcwd() + '/' + filePath + 'exportOptions.plist'
+	exportOptionsPlistFilePath = filePath + '/exportOptions.plist'
 
-	jsonFilePath = filePath + 'ipa.json'
+	jsonFilePath = filePath + '/ipa.json'
 	with open(jsonFilePath, 'r') as load_f:
 		ipaConfig = json.load(load_f)
 	global scheme

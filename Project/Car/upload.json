@@ -20,6 +20,6 @@
             "ipa_build":"1.0.0",
             "ipa_version":"1.0.0"
         }
-	}
-    "notifyToDingDing":"0",
+	},
+    "notifyToDingDing":"0"
 }

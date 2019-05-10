@@ -11,7 +11,7 @@ def initConfig(folder, log):
     global uploadLog
     uploadLog = log
 
-    jsonFilePath = folder  + 'upload.json'
+    jsonFilePath = folder + '/upload.json'
     if os.path.exists(jsonFilePath) == False:
         print('there is not upload config, so don\'t upload ipa')
         return

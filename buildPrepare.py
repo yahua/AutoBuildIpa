@@ -66,7 +66,7 @@ def checkGit():
             if pullGit():
                 log = logGit()
                 #开始打包
-                buildStart.startBag(projectConfig.get('ipaConfigFilePath'), commonConfig.get('outputPath'), log)
+                buildStart.startBag(dirname, commonConfig.get('outputPath'), log)
                 pass
             else:
                 print('git pull failure')
@@ -76,14 +76,14 @@ def checkGit():
         if pullGit():
             log = logGit()
             # 开始打包
-            buildStart.startBag(projectConfig.get('ipaConfigFilePath'), commonConfig.get('outputPath'), log)
+            buildStart.startBag(dirname, commonConfig.get('outputPath'), log)
             pass
         else:
             print('git pull failure')
 
-def intoProjectWorkspace(rootPath):
-    #desktop = os.path.join(os.path.expanduser("~"), 'Desktop')
-    rootWorkspace = rootPath + commonConfig['workSpaceFilePath']
+def intoProjectWorkspace():
+    desktop = os.path.join(os.path.expanduser("~"), 'Desktop')
+    rootWorkspace = desktop + commonConfig['workSpaceFilePath']
     folder = projectConfig['workSpaceFolder']
     projectFilePath = '%s%s' %(rootWorkspace, folder)
     if os.path.exists(projectFilePath) == False:
@@ -91,14 +91,14 @@ def intoProjectWorkspace(rootPath):
         os.makedirs(projectFilePath)
     print('cd %s'%(projectFilePath))
     os.chdir(projectFilePath)
-    commonConfig['outputPath'] = rootPath + commonConfig.get('outputPath')
+    commonConfig['outputPath'] = desktop + commonConfig.get('outputPath')
     checkGit()
 
 def initConifg(rootPath):
 
     global commonConfig
-    commonConfig = {'/workSpaceFilePath/': 'workspace',
-                    '/outputPath': 'output-ipa/',
+    commonConfig = {'workSpaceFilePath': '/YAH_AutoIpa/workspace/',
+                    'outputPath': '/YAH_AutoIpa/output-ipa/',
                     'project': '/project.json'}
 
     jsonFilePath = rootPath + commonConfig['project']
@@ -117,6 +117,7 @@ if __name__ == '__main__':
     parser.add_argument("-f", "--file", help="Build the project config json file.", metavar="project config json file")
     options = parser.parse_args()
     #options.file = 'Project/Fischerhaus.json'
+    global dirname, filename
     dirname, filename = os.path.split(os.path.abspath(sys.argv[0]))
     if dirname is None:
         print('请输入要打包的项目配置json路径')
