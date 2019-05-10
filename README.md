@@ -10,10 +10,24 @@
 参考Project/Car文件夹
 
 
-project.json为打包的项目配置，需要手动配置
+###project.json为打包的项目配置，需要手动配置
 "workSpaceFolder":"TestProject",    --拉取下来的项目文件夹名称
-"workSpaceGitUrl":"https://github.com/yahua/TestAutoBuildIpa.git",   --仓库地址
+
+"workSpaceGitUrl":"https://github.com/yahua/TestAutoBuildIpa.git", 
+  --仓库地址
+
 "branch":"master",    --打包的分支
-"ipaConfigFilePath":"ipaConfig/debug/"   --打包的配置路径
 
+###ipa.json为ipa配置
 
+"configuration":"Debug",
+
+"projectPath":"Fischerhaus/",  
+
+"workspace":"Fischerhaus.xcworkspace",
+
+"project":"Fischerhaus.xcodeproj",
+
+"scheme":"Fischerhaus"
+
+###upload.json为上传配置
