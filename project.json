@@ -1,0 +1,6 @@
+{
+    "workSpaceFolder":"CySmart",
+    "说明":"workSpaceGitUrl 在本机未输入过 需要帐号和密码https://帐号:密码@github.com/yahua/TestAutoBuildIpa.git",
+    "workSpaceGitUrl":"http://wangsw:123456@172.20.17.56:11021/wangsw/ios_cysmart.git",
+    "branch":"develop"
+}

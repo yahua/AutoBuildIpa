@@ -1,0 +1,15 @@
+{
+    "uploadOpen":"1",
+  	"uploadPlatform":"payer",
+    "notifyToDingDing":"0",
+	"uploadPlatformInfo":{
+        "payer":{
+            "buildUpdateDescription":"test auto bag",
+            "uploadUrl":"https://www.pgyer.com/apiv2/app/upload",
+            "_api_key":"f2f58c1df394893b8dc04eed9ea29060",
+            "buildInstallType":"2",
+            "buildPassword":"",
+            "buildName":"城城通"
+        }
+	}
+}
